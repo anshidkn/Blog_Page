@@ -1,0 +1,18 @@
+{% for comment in comments %}
+  <div class="card-body">
+      <div class="media mb-4">
+          <img class="d-flex mr-3 rounded-circle " src="\static\img\user.png" alt="" style="width:30px;height:30px">
+          <div class="media-body">
+              <b class="mt-0 text-info">{{comment.user}} </b>- {{comment.date}}
+              <p class="st">{{comment.comment}}
+                  <a href="{% url 'add_reply' post.pk comment.pk %}"class="mx-3" id="show-comment-form-btn">Reply</a>
+              </p>
+          </div>
+      </div>
+      {% if comment.children %}
+        <ul class="list-unstyled ml-4">
+          {% include 'comment_tree.html' with comments=comment.children.all %}
+        </ul>
+      {% endif %}
+  </div>
+{% endfor %}

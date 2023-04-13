@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+
+<!-- main -->
+{% if user.is_authenticated %}
+  {% if user.id == post.user.id %}
+  <div class="container my-5">
+    <h1>Edit Post</h1>
+    <hr>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+  {{form.as_p}}
+      <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+  </div>
+     {% else %}
+      Access Declined  
+  {% endif %}
+  {% else %}
+    Access Declined  
+   {% endif %}
+ 
+   {%endblock%}

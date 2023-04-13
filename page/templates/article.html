@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block body %}
+    <!-- main -->
+    <div class="container my-5">
+      <h1>Single Post Detail Page</h1>
+      <hr>
+      <div class="card">
+        <img class="card-img-top" src="{{post.image.url}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{post.title}}</h5>
+          <p class="card-text">{{post.description}}</p>
+          <p class="card-text"><small class="text-muted">{{post.date}} by {{post.user.username}}</small></p>
+          {% if user.is_authenticated %}
+            {% if user.id == post.user.id %}
+                <a href="{% url 'update_post' post.pk %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'delete_post' post.pk %}" class="btn btn-primary">Remove</a>
+              
+            {% endif %}
+            <a href="{% url 'add_comment' post.pk %}" class="btn btn-primary" id="show-comment-form-btn">Add Comment</a>
+        {% else %}
+        <p>Please Login to Post Comment</p>
+          {%endif %}
+        </div>
+      </div>
+      <div class="card mb-4">
+        <div class="card-header">
+          <h4>Comments:</h4>
+        </div>
+        {% with comments=post.comments.all %}
+        {% include 'comment_tree.html' with comments=comments %}
+        {% endwith %}
+    </div>
+    </div>
+{% endblock %}

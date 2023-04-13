@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+    
+   
+<div class="container my-5">
+  {% if user.is_authenticated %}
+  <h1>Add Post</h1>
+  <hr>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+  <button class="btn btn-secondary">Post</button>
+
+<script>
+  var name = "{{user.id}}";
+  document.getElementById("usr").value = name;
+</script>
+{% else %}
+Access Denied
+{% endif %}
+</form>
+</div>
+{%endblock%}

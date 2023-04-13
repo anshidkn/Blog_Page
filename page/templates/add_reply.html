@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="container my-5">
+        <h1>Add Reply</h1>
+        <hr>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="hidden" name="parent_id" value="{{ parent_comment.id }}">
+            <button type="submit" class="btn btn-primary mt-2">Submit</button>
+        </form>
+    </div>
+{% endblock %}
