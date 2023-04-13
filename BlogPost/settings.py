@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'page',
     'members',
-    'django_seed',
     'django.contrib.humanize',
     'mptt',
 
